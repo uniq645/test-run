@@ -3,7 +3,7 @@ backend:
   branch: main
 
   # Required for OAuth to work:
-  proxy_url: https://your-site.netlify.app/api/v1
+  proxy_url: https://test-runs.netlify.app/api/v1
 
 media_folder: "static/img/uploads"
 public_folder: "/img/uploads"
