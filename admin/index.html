@@ -3,9 +3,16 @@
 <head>
   <meta charset="utf-8" />
   <title>Content Manager</title>
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Load Decap CMS only after DOM is ready
+      const script = document.createElement("script");
+      script.src = "https://cdn.jsdelivr.net/npm/decap-cms@^3.0.0/dist/decap-cms.js";
+      document.head.appendChild(script);
+    });
+  </script>
 </head>
 <body>
-  <!-- Netlify auto-handles OAuth redirects -->
 </body>
 </html>
+
