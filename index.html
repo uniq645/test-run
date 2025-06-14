@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>My Site</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/blog.html">Blog</a>
+    <a href="/programme.html">Programmes</a>
+  </nav>
+
+  <h1>Welcome to My Site</h1>
+  <div id="featured-posts"></div>
+
+  <script src="/js/blog.js"></script>
+  <script>
+    // Display 3 latest posts on homepage
+    fetch('/blog')
+      .then(res => res.json())
+      .then(posts => {
+        const container = document.getElementById('featured-posts');
+        posts.slice(0, 3).forEach(post => {
+          container.innerHTML += `
+            <div class="post-preview">
+              <h3><a href="/single-blog.html?post=${post.slug}">${post.title}</a></h3>
+              <p>${post.excerpt}</p>
+            </div>
+          `;
+        });
+      });
+  </script>
+</body>
+</html>

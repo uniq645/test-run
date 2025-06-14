@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Blog Post</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <article id="blog-post">
+    <a href="/blog.html">← Back to Blog</a>
+    <h1 id="post-title"></h1>
+    <p id="post-date"></p>
+    <img id="post-image" src="" alt="">
+    <div id="post-content"></div>
+  </article>
+  <script>
+    const slug = new URLSearchParams(window.location.search).get('post');
+    fetch(`/blog/${slug}.md`)
+      .then(res => res.text())
+      .then(text => {
+        const { title, date, image, body } = parseMarkdown(text);
+        document.getElementById('post-title').textContent = title;
+        document.getElementById('post-date').textContent = new Date(date).toLocaleDateString();
+        document.getElementById('post-image').src = image;
+        document.getElementById('post-content').innerHTML = marked.parse(body);
+      });
+
+    function parseMarkdown(text) {
+      const [frontmatter, content] = text.split('---\n').slice(1);
+      const data = {};
+      frontmatter.split('\n').forEach(line => {
+        const [key, ...value] = line.split(':');
+        if (key) data[key.trim()] = value.join(':').trim();
+      });
+      return { ...data, body: content };
+    }
+  </script>
+</body>
+</html>
