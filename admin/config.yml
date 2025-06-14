@@ -1,10 +1,7 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: uniq645/test-run  
   branch: main
-
-  # Required for OAuth to work:
-  proxy_url: https://test-runs.netlify.app/api/v1
-  auth_scope: repo  # Grants repo access
 
 media_folder: "static/img/uploads"
 public_folder: "/img/uploads"
